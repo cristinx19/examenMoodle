@@ -26,10 +26,13 @@ wget https://github.com/moodle/moodle/archive/refs/tags/v4.3.1.zip -P /tmp
 unzip /tmp/v4.3.1.zip -d /tmp
 
 # Crear una carpeta para los datos de moodle por seguridad
-mkdir /var/www/moodledata
+sudo mkdir /var/www/moodledata
 
 # Dar permisos a la carpeta
 chmod 777 /var/www/moodledata
+
+chown -R www-data:www-data /var/www/html
+chown -R www-data:www-data /var/www/moodledata
 
 # Mover los archivos de la carpeta moodle al directorio html
 mv -f /tmp/moodle-4.3.1/* /var/www/html
