@@ -24,22 +24,16 @@ apt install unzip
 # Descomprimimos el archivo
 unzip /tmp/v4.3.1.zip -d /tmp
 
-# Borramos carpeta modledata
-rm -rf /var/www/moodledata
-rm -rf /var/www/html/*
-# Creamos el directorio moodledata
+# Crear una carpeta para los datos de moodle por seguridad
 mkdir /var/www/moodledata
 
-# Movemos el archivo a /var/www/html
-mv /tmp/moodle-4.3.1/* /var/www/html/
+# Dar permisos a la carpeta
+chmod 777 /var/www/moodledata
 
-chown -R www-data:www-data /var/www/html
-chown -R www-data:www-data /var/www/moodledata
-# Movemos el archivo .htaccess para las rutas permanentes
-cp -f ../htaccess/.htaccess /var/www/html
+# Mover los archivos de la carpeta moodle al directorio html
+mv -f /tmp/moodle-4.3.1/* /var/www/html
 
-
-# Comando para el archivo config.php
+# Instalación de Moodle
 sudo -u www-data php /var/www/html/admin/cli/install.php \
     --lang=$MOODLE_LANG \
     --wwwroot=$MOODLE_WWWROOT \
